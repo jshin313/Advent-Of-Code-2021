@@ -4,6 +4,10 @@ using namespace std;
 
 int num_depth_increase(vector<int> &depths)
 {
+    if (depths.size() < 1) {
+        return 0;
+    }
+
     int prev_depth = depths[0];
     int count = 0;
     for (int i = 1; i < depths.size(); i++) {
