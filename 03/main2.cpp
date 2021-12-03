@@ -56,9 +56,9 @@ int main(int argc, char **argv)
         }
         for (auto it = strings.begin(); it != strings.end();) {
 
-            string str = *it;
-            if (strings.size() <= 2) {
-                cout << str << endl;
+            auto str = *it;
+            if (strings.size() == 1) {
+                cout << *strings.begin() << endl;
                 goto end1;
             }
 
@@ -68,6 +68,10 @@ int main(int argc, char **argv)
                 it++;
             }
         }
+        if (strings.size() == 1) {
+            cout << *strings.begin() << endl;
+            break;
+        }
     }
     
 end1:
@@ -75,19 +79,16 @@ end1:
     // co2
     for (int i = 0; i < n; i++) {
         int curr_digit = one_or_zero(strings2, i);
-        if (curr_digit == 1) {
+        if (curr_digit == -1) {
             curr_digit = 0;
-        } else if (curr_digit == 0) {
-            curr_digit = 1;
         } else {
-            curr_digit = 0;
+            curr_digit = !curr_digit;
         }
-        for (auto it = strings2.begin(); it != strings2.end();) {
 
-            string str = *it;
-            if (strings2.size() <= 1) {
-                cout << str << endl;
-                /* cout << strings2[1] << endl; */
+        for (auto it = strings2.begin(); it != strings2.end();) {
+            auto str = *it;
+            if (strings2.size() == 1) {
+                cout << *strings2.begin() << endl;
                 goto end2;
             }
 
@@ -96,6 +97,10 @@ end1:
             } else {
                 it++;
             }
+        }
+        if (strings2.size() == 1) {
+            cout << *strings2.begin() << endl;
+            break;
         }
     }
 end2:
