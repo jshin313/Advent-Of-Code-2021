@@ -29,22 +29,17 @@ int main(int argc, char **argv)
                 zeroes++;
             }
         }
-        if (ones > zeroes) {
-            gamma[i] = 1;
-            epsilon[i] = 0;
-        } else {
-            gamma[i] = 0;
-            epsilon[i] = 1;
-        }
+        gamma[i] = ones > zeroes;
+        epsilon[i] = !gamma[i];
     }
 
-    for (auto c: gamma) {
-        cout << c;
+    for (auto g: gamma) {
+        cout << g;
     }
     cout << endl;
 
-    for (auto c: epsilon) {
-        cout << c;
+    for (auto e: epsilon) {
+        cout << e;
     }
     cout << endl;
 }
