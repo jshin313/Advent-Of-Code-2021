@@ -68,22 +68,19 @@ int score(vector<int>& called_nums, vector<vector<vector<int>>> &boards) {
                         board[i][j] = MARK;
                     }
 
-                    /* print_board(board); */
-                    if (check_bingo(board)) {
-                        if (boards.size() == 1) {
-                            print_board(board);
-                            return called_num * get_uncalled_num_sum(board);
-                        } else {
-                            it = boards.erase(it);
-                            goto next_board;
-                        }
-                    }
 
                 }
             }
-            it++;
-next_board:
-            continue;
+            if (check_bingo(board)) {
+                if (boards.size() == 1) {
+                    print_board(board);
+                    return called_num * get_uncalled_num_sum(board);
+                } else {
+                    it = boards.erase(it);
+                }
+            } else {
+                it++;
+            }
         }
     }
 
@@ -103,12 +100,12 @@ int main(int argc, char **argv)
     cin >> s;
 
     // https://stackoverflow.com/a/1894955/9512643
-    std::vector<int> vect;
+    std::vector<int> nums_called;
 
     std::stringstream ss(s);
 
     for (int i; ss >> i;) {
-        vect.push_back(i);    
+        nums_called.push_back(i);    
         if (ss.peek() == ',')
             ss.ignore();
     }
@@ -145,5 +142,5 @@ int main(int argc, char **argv)
     /*     cout << endl; */
     /* } */
 
-    cout << score(vect, boards) << endl;
+    cout << score(nums_called, boards) << endl;
 }
