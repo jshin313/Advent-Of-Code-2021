@@ -2,8 +2,8 @@
 
 using namespace std;
 
-#define MARK -1
-#define BOARD_SIDE_LEN 5
+constexpr int MARK = -1;
+constexpr int BOARD_SIDE_LEN = 5;
 
 void print_board(const vector<vector<int>> & board) {
     for (auto row: board) {
@@ -133,12 +133,12 @@ int main(int argc, char **argv)
 
 
         row.push_back(num);
-        if (board.size() > BOARD_SIDE_LEN) {
-            throw runtime_error{"The given board is not a square board as expected for a bingo board."};
-        } else if (row.size() > BOARD_SIDE_LEN) {
-            throw runtime_error{"The given board is not a square board as expected for a bingo board."};
-        }
-}
+    }
+    if (board.size() > BOARD_SIDE_LEN) {
+        throw runtime_error{"The given board is not a square board as expected for a bingo board."};
+    } else if (row.size() > BOARD_SIDE_LEN) {
+        throw runtime_error{"The given board is not a square board as expected for a bingo board."};
+    }
     board.push_back(row);
     boards.push_back(board);
 
