@@ -34,6 +34,10 @@ int one_or_zero(vector<string>& strs, int i) {
 }
 
 string oxygen(vector<string> strings) {
+    if (strings.size() <= 0) {
+        throw runtime_error{"No binary numbers were provided as input."};
+    }
+
     // oxygen
     int n = strings[0].size();
 
@@ -59,11 +63,14 @@ string oxygen(vector<string> strings) {
             return *strings.begin();
         }
     }
-    return nullptr;
+    throw runtime_error{"Error! More than one oxygen rating!"};
 }
 
 
 string co2(vector<string> strings) {
+    if (strings.size() <= 0) {
+        throw runtime_error{"No binary numbers were provided as input."};
+    }
 
     int n = strings[0].size();
     // co2
@@ -91,6 +98,10 @@ string co2(vector<string> strings) {
             return *strings.begin();
         }
     }
+
+    throw runtime_error{"Error! More than one co2 rating!"};
+
+
 }
 
 int main(int argc, char **argv)
