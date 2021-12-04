@@ -33,22 +33,10 @@ int one_or_zero(vector<string>& strs, int i) {
     }
 }
 
-int main(int argc, char **argv)
-{
-    freopen("input2.txt", "r", stdin);
-    vector<int> input;
-    string s;
-    vector<string> strings;
-    vector<string> strings2;
-
-    while (cin >> s) {
-        strings.push_back(s);
-        strings2.push_back(s);
-    }
-
+string oxygen(vector<string> strings) {
+    // oxygen
     int n = strings[0].size();
 
-    // oxygen
     for (int i = 0; i < n; i++) {
         int curr_digit = one_or_zero(strings, i);
         if (curr_digit == -1){
@@ -58,8 +46,7 @@ int main(int argc, char **argv)
 
             auto str = *it;
             if (strings.size() == 1) {
-                cout << *strings.begin() << endl;
-                goto end1;
+                return *strings.begin();
             }
 
             if (str[i] - '0' != curr_digit) {
@@ -69,40 +56,54 @@ int main(int argc, char **argv)
             }
         }
         if (strings.size() == 1) {
-            cout << *strings.begin() << endl;
-            break;
+            return *strings.begin();
         }
     }
-    
-end1:
-    cout << endl;
+    return nullptr;
+}
+
+
+string co2(vector<string> strings) {
+
+    int n = strings[0].size();
     // co2
     for (int i = 0; i < n; i++) {
-        int curr_digit = one_or_zero(strings2, i);
+        int curr_digit = one_or_zero(strings, i);
         if (curr_digit == -1) {
             curr_digit = 0;
         } else {
             curr_digit = !curr_digit;
         }
 
-        for (auto it = strings2.begin(); it != strings2.end();) {
+        for (auto it = strings.begin(); it != strings.end();) {
             auto str = *it;
-            if (strings2.size() == 1) {
-                cout << *strings2.begin() << endl;
-                goto end2;
+            if (strings.size() == 1) {
+                return *strings.begin();
             }
 
             if (str[i] - '0' != curr_digit) {
-                it = strings2.erase(it);
+                it = strings.erase(it);
             } else {
                 it++;
             }
         }
-        if (strings2.size() == 1) {
-            cout << *strings2.begin() << endl;
-            break;
+        if (strings.size() == 1) {
+            return *strings.begin();
         }
     }
-end2:
-    cout << endl;
+}
+
+int main(int argc, char **argv)
+{
+    freopen("input2.txt", "r", stdin);
+    vector<int> input;
+    string s;
+    vector<string> strings;
+
+    while (cin >> s) {
+        strings.push_back(s);
+    }
+
+    cout << oxygen(strings) << endl;
+    cout << co2(strings) << endl;
 }
