@@ -5,7 +5,7 @@ using namespace std;
 #define MARK -1
 #define BOARD_SIDE_LEN 5
 
-void print_board(vector<vector<int>> & board) {
+void print_board(const vector<vector<int>> & board) {
     for (auto row: board) {
         for (auto elem: row) {
             cout << elem << " ";
@@ -16,7 +16,7 @@ void print_board(vector<vector<int>> & board) {
     cout << endl;
 }
 
-int get_uncalled_num_sum(vector<vector<int>> & board) {
+int get_uncalled_num_sum(const vector<vector<int>> & board) {
     int sum = 0;
     for (int i = 0; i < board.size(); i++) {
         for (int j = 0; j < board[0].size(); j++) {
@@ -28,7 +28,7 @@ int get_uncalled_num_sum(vector<vector<int>> & board) {
     return sum;
 }
 
-bool check_bingo(vector<vector<int>> & board) {
+bool check_bingo(const vector<vector<int>> & board) {
     // Check rows for bingo
     for (int i = 0; i < board.size(); i++) {
         bool is_bingo = true;
@@ -57,7 +57,7 @@ bool check_bingo(vector<vector<int>> & board) {
     return false;
 }
 
-int score(vector<int>& called_nums, vector<vector<vector<int>>> &boards) {
+int score(const vector<int>& called_nums, vector<vector<vector<int>>> &boards) {
     int bingo_wins = 0;
     for (auto called_num: called_nums) {
         for (auto it = boards.begin(); it != boards.end(); ) {
