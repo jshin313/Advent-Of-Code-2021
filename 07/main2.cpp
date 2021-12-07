@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int get_cost(int i, vector<int> & crab_pos) {
+int get_cost(int i, const vector<int> & crab_pos) {
     int fuel = 0;
     for (auto pos: crab_pos) {
         int dist = abs(pos - i);
