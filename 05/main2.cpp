@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// TODO: Make a class to make it look better
+// TODO: Make a few classes to make it look better
 
 void print_matrix(const vector<vector<int>> & matrix) {
     for (auto row: matrix) {
