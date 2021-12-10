@@ -3,40 +3,22 @@
 using namespace std;
 
 
-int get_error_score(string s) {
-    unordered_map<char, int> score;
-    score[')'] = 3;
-    score[']'] = 57;
-    score['}'] = 1197;
-    score['>'] = 25137;
+int get_error_score(const string & s) {
+    unordered_map<char, int> points = {{')', 3}, {']', 57}, {'}', 1197}, {'>', 25137}};
+    unordered_map<char, char> matching = {{')', '('}, {']', '['}, {'>', '<'}, {'}', '{'}};
 
     stack<int> stk;
     for (auto c: s) {
-        if (c == ')') {
-            if (stk.top() != '(') {
-                return score[c];
-            }
-            stk.pop();
-        } else if (c == ']') {
-            if (stk.top() != '[') {
-                return score[c];
-            }
-            stk.pop();
-        } else if (c == '}') {
-            if (stk.top() != '{') {
-                return score[c];
-            }
-            stk.pop();
-        } else if (c == '>') {
-            if (stk.top() != '<') {
-                return score[c];
+        if (matching.find(c) != matching.end()) {
+            if (matching[c] != stk.top()) {
+                return points[c];
             }
             stk.pop();
         } else {
             stk.push(c);
         }
     }
-    
+
     return 0;
 }
 

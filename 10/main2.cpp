@@ -2,26 +2,13 @@
 
 using namespace std;
 
-unsigned long get_error_score(string s) {
+unsigned long get_error_score(const string &s) {
+    unordered_map<char, char> matching = {{')', '('}, {']', '['}, {'>', '<'}, {'}', '{'}};
+
     stack<int> stk;
     for (auto c: s) {
-        if (c == ')') {
-            if (stk.top() != '(') {
-                return 0;
-            }
-            stk.pop();
-        } else if (c == ']') {
-            if (stk.top() != '[') {
-                return 0;
-            }
-            stk.pop();
-        } else if (c == '}') {
-            if (stk.top() != '{') {
-                return 0;
-            }
-            stk.pop();
-        } else if (c == '>') {
-            if (stk.top() != '<') {
+        if (matching.find(c) != matching.end()) {
+            if (matching[c] != stk.top()) {
                 return 0;
             }
             stk.pop();
@@ -30,27 +17,11 @@ unsigned long get_error_score(string s) {
         }
     }
 
-
+    unordered_map<char, int> points = {{'(', 1}, {'[', 2}, {'{', 3}, {'<', 4}};
     unsigned long score = 0;
     while (!stk.empty()) {
-        switch (stk.top()) {
-            case '[':
-                score *= 5;
-                score +=2;
-                break;
-            case '(':
-                score *= 5;
-                score += 1;
-                break;
-            case '{':
-                score *= 5;
-                score+= 3;
-                break;
-            case '<':
-                score *= 5;
-                score += 4;
-                break;
-        }
+        score *= 5;
+        score += points[stk.top()];
         stk.pop();
     }
 
