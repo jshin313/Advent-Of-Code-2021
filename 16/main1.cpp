@@ -23,9 +23,9 @@ int bin_to_int(const vector<int>& v, int bit_pos, int end) {
     return return_value;
 }
 
-int get_literal(const vector<int>& transmission, int &bit_pos) {
+unsigned long get_literal(const vector<int>& transmission, int &bit_pos) {
     bool last_group = false;
-    int literal = 0;
+    unsigned long literal = 0;
     while (!last_group) {
         last_group = transmission[bit_pos] == 0;
         int tmp_literal = bin_to_int(transmission, bit_pos+1, bit_pos+5);
@@ -50,7 +50,7 @@ int parse_transmission(const vector<int>& transmission, int &bit_pos, int end) {
     bit_pos += 6;
 
     if (pack_type == 4) {
-        int literal_val = get_literal(transmission, bit_pos);
+        unsigned long literal_val = get_literal(transmission, bit_pos);
         cout << "Literal val: " << literal_val << endl;
         return ver_nums;
     }
@@ -67,7 +67,7 @@ int parse_transmission(const vector<int>& transmission, int &bit_pos, int end) {
                 cout << "Length of sub packet: "  << total_len << endl;
                 bit_pos+=15;
                 end = bit_pos + total_len;
-                while (bit_pos < end && bit_pos < transmission.size()) {
+                while (bit_pos < end) {
                     ver_nums += parse_transmission(transmission, bit_pos, end);
                 }
                 break;
